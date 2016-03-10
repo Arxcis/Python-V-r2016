@@ -19,7 +19,7 @@ scr = turtle.Screen()
 # --- Init Screen ---
 scr.bgcolor("Black")
 scr.delay(5)
-scr.setup(830, 830)
+# scr.setup(830, 830)
 
 # --- Init floater ----
 floater.color("Green")
@@ -51,7 +51,7 @@ def create_positiongrid():
     print(len(position_grid))          # Debugging data
 
 
-def show_positiongrid():
+def show_positiongrid(method, submethod):
     global position_grid
     # ---- Display the 5 X 5 grid on screen ----
     for i in range(25):
@@ -65,36 +65,42 @@ def show_positiongrid():
         writer_x = int(writer_x)
         writer_y = int(writer_y)
 
-        # ---- Methods for displaying grid informatiion -----
-
-        # --- Method 1 ---  Print values in a grid, using writer.distance()-function
-        # writer.write(writer.distance(floater_x, floater_y))
-
         # --- Calculate distance for all points in grid ----
         d = int(math.sqrt(((floater_x - writer_x) ** 2) + ((floater_y - writer_y) ** 2)))
-
-        # --- Method 2 ---  Print values in a grid, using "d"
-        # writer.write(d)
-
-        # --- Method 3 ---  Print values to console, no grid
-        # print(d)
-
-        # --- Method 4 ---  THE MOST AWESOME METHOD !
-        colorpick = int(255/(d*0.01))
-        if colorpick > 255:
-            colorpick = 255
-        else:
-            pass
-        writer.color(colorpick, 0, 0)
-        # --- Method 4a ---
-        # writer.write(d)
-        # --- Method 4b ---
-        writer.fillcolor((colorpick, 0, 0))
-        writer.begin_fill()
-        writer.circle(7)
-        writer.end_fill()
         
-
+        # ---- Methods for displaying grid informatiion -----
+        if method  == 1:
+            #--- Method 1 ---  Print values in a grid, using writer.distance()-function
+            writer.write(writer.distance(floater_x, floater_y))
+            
+        elif method == 2:
+            # --- Method 2 ---  Print values in a grid, using "d"
+            writer.write(d)
+            
+        elif method == 3:
+            # --- Method 3 ---  Print values to console, no grid
+            print(d)
+            
+        elif method == 4:
+            # --- Method 4 ---  THE MOST AWESOME METHOD !
+            colorpick = int(255/(d*0.01))
+            if colorpick > 255:
+                colorpick = 255
+            else:
+                pass
+            writer.color(colorpick, 0, 0)
+            if submethod == 1:
+                # --- Method 4a ---
+                writer.write(d)
+            elif submethod == 2:
+                # --- Method 4b ---
+                writer.fillcolor((colorpick, 0, 0))
+                writer.begin_fill()
+                writer.circle(7)
+                writer.end_fill()
+        
+        else:
+            return print("Wrong input! to show_position()")
 
 
 def move_left():
@@ -121,7 +127,7 @@ while game_over is False:
     # --- Statement is passed every 0.1 second ---
     if time.clock() > clock_cache + 0.1:
         writer.clear()
-        show_positiongrid()
+        show_positiongrid(4, 2)
         clock_cache = time.clock()
 
 scr.mainloop()
