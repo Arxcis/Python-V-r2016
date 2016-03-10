@@ -19,7 +19,7 @@ scr = turtle.Screen()
 # --- Init Screen ---
 scr.bgcolor("Black")
 scr.delay(5)
-scr.setup(900, 900)
+scr.setup(830, 830)
 
 # --- Init floater ----
 floater.color("Green")
@@ -56,6 +56,7 @@ def show_positiongrid():
     # ---- Display the 5 X 5 grid on screen ----
     for i in range(25):
         writer.setpos(position_grid[2*i], position_grid[(2*i)+1])
+
         # --- Get floater and writer position int form ---
         floater_x, floater_y = floater.position()
         floater_x = int(floater_x)
@@ -63,6 +64,8 @@ def show_positiongrid():
         writer_x, writer_y = writer.position()
         writer_x = int(writer_x)
         writer_y = int(writer_y)
+
+        # ---- Methods for displaying grid informatiion -----
 
         # --- Method 1 ---  Print values in a grid, using writer.distance()-function
         # writer.write(writer.distance(floater_x, floater_y))
@@ -77,13 +80,21 @@ def show_positiongrid():
         # print(d)
 
         # --- Method 4 ---  THE MOST AWESOME METHOD !
-        colorpick = int(255/(d*0.005))
+        colorpick = int(255/(d*0.01))
         if colorpick > 255:
             colorpick = 255
         else:
             pass
         writer.color(colorpick, 0, 0)
-        writer.write(d)
+        # --- Method 4a ---
+        # writer.write(d)
+        # --- Method 4b ---
+        writer.fillcolor((colorpick, 0, 0))
+        writer.begin_fill()
+        writer.circle(7)
+        writer.end_fill()
+        
+
 
 
 def move_left():
