@@ -42,7 +42,7 @@ position_grid = []
 
 def create_positiongrid():
     global position_grid
-
+    # --- Create a 5 X 5 grid, with positinal values, stored as a list ---
     for i in range(5):
         for j in range(5):
             extend_list = [-400 + (200*j), 400 - (200*i)]
@@ -53,6 +53,7 @@ def create_positiongrid():
 
 def show_positiongrid():
     global position_grid
+    # ---- Display the 5 X 5 grid on screen ----
     for i in range(25):
         writer.setpos(position_grid[2*i], position_grid[(2*i)+1])
         # --- Get floater and writer position int form ---
@@ -103,8 +104,10 @@ create_positiongrid()
 scr.colormode(255)
 
 while game_over is False:
+    # --- Constant movement of turtle ---
     floater.forward(3)
 
+    # --- Statement is passed every 0.1 second ---
     if time.clock() > clock_cache + 0.1:
         writer.clear()
         show_positiongrid()
