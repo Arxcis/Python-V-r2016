@@ -16,8 +16,10 @@ def input_data():
 
 
 def show_data():
-    with open("cal_data.txt", "r") as data:
-        easygui.textbox("Here is the data recorded so far:", "Get the data!", data)
+    data = open("cal_data.txt", "r")
+    easygui.textbox("Here is the data recorded so far:", "Get the data!", data)
+    print(data)
+
     if easygui.ynbox("Do you want to enter more information?", "Get the data!"):
         input_data()
     else:
